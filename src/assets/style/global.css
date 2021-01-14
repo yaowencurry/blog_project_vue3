@@ -1,0 +1,164 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+#app {
+  font-family: sy-sans, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h2 {
+  color: #555;
+  line-height: 1.2;
+  font-size: 26px;
+  font-weight: 400;
+  text-align: center;
+}
+h3 {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 0;
+}
+span.tips {
+  color: #999;
+  font-size: 12px;
+}
+.white {
+  color: #fff;
+}
+a {
+  text-decoration: none;
+  color: #999;
+  font-size: 12px;
+}
+p {
+  font-size: 14px;
+  color: #1a1a1a;
+  padding: 20px 0;
+  line-height: 1.7;
+}
+.w-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-start {
+  justify-content: flex-start;
+}
+.c-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.common-margin-top {
+  margin-top: 20px;
+}
+.common-margin-bottom {
+  margin-bottom: 20px;
+}
+.center {
+  text-align: center;
+}
+.m-20 {
+  margin: 20px;
+}
+.m-top-20 {
+  margin-top: 20px;
+}
+.m-auto {
+  margin: 0 auto;
+}
+.m-bottom-20 {
+  margin-bottom: 20px;
+}
+.m-right-20 {
+  margin-right: 20px;
+}
+.m-left-20 {
+  margin-left: 20px;
+}
+.p-20 {
+  padding: 20px;
+}
+.p-10 {
+  padding: 10px;
+}
+.p-top-20 {
+  padding-top: 20px;
+}
+.p-bottom-20 {
+  padding-bottom: 20px;
+}
+.w-100 {
+  width: 100%;
+}
+.w-75 {
+  width: 75%;
+}
+.w-50 {
+  width: 50%;
+}
+.d-block {
+  display: block;
+}
+.border-box {
+  box-sizing: border-box;
+}
+.pointer {
+  cursor: pointer;
+}
+.btn {
+  width: 150px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 0;
+  margin: 30px auto 10px auto;
+  display: block;
+  cursor: pointer;
+}
+/* .el-button--primary {
+  color: #fff;
+  background-color: #222222;
+  border: none;
+}
+.el-button--primary:hover,
+.el-button--primary:active,
+.el-button--primary:focus {
+  color: #fff;
+  background-color: #222222;
+  border: none;
+} */
+li {
+  text-decoration: none;
+  list-style: none;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #cccbcb;
+}
+h1 {
+  font-weight: 600;
+  font-synthesis: style;
+  font-size: 24px;
+  line-height: 1.22;
+  margin: 24px 0;
+  word-wrap: break-word;
+}
+h4 {
+  font-weight: 600;
+  font-synthesis: style;
+  font-size: 18px;
+  line-height: 1.22;
+  margin: 24px 0;
+  word-wrap: break-word;
+}
+.code {
+  background: rgb(37, 37, 37);
+  padding: 10px;
+  border-radius: 4px;
+  color: #fff;
+}
+img {
+  width: 100%;
+}
