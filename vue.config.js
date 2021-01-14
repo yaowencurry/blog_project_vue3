@@ -22,5 +22,5 @@ module.exports = {
       },
     },
   },
-  publicPath: '/blog_project_vue3/dist/'
+  publicPath: './'
 }
