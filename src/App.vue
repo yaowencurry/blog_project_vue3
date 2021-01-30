@@ -188,9 +188,11 @@ export default {
   box-sizing: border-box;
 }
 .app__right__box {
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 20px;
 }
 .back-top {
   position: fixed;

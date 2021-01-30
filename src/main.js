@@ -6,7 +6,12 @@ import ElementPlus from 'element-plus';
 import './assets/style/global.css'
 import './assets/style/iconfont/iconfont.css'
 import 'element-plus/lib/theme-chalk/index.css';
+import axios from './utils/axios/index'
 // import 'github-markdown-css/github-markdown.css'
 // import './assets/style/markdown.css'
 
-createApp(App).use(store).use(router).use(ElementPlus).mount('#app')
+
+const app = createApp(App)
+app.config.globalProperties.$axios = axios;
+
+app.use(store).use(axios).use(router).use(ElementPlus).mount('#app')

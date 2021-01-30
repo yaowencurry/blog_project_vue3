@@ -42,6 +42,7 @@ import MyMenu from '../components/common/IndexMenu';
 import MyFooter from '../components/common/Footer';
 import MyTime from '../components/time/MyTime';
 import { onMounted, ref } from 'vue';
+
 export default {
   name: 'App',
   components: {

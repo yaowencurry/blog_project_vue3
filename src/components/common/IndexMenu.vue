@@ -20,18 +20,10 @@ export default {
           route: 'HomeIndex',
           text: '首页'
         },
-        // {
-        //   route: '',
-        //   text: '前端技术'
-        // },
-        // {
-        //   route: 'QuestionIndex',
-        //   text: '随笔记录'
-        // },
-        // {
-        //   route: 'YoungIndex',
-        //   text: '关于作者'
-        // },
+        {
+          route: 'BookIndex',
+          text: '电子书'
+        },
         {
           route: 'EditArtical',
           text: '发布文章'

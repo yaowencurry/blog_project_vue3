@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import articalRoutes from './moudle/artical'
+import bookRoutes from './moudle/book'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     ...articalRoutes,
+    ...bookRoutes,
     {
       path: '/home',
       name: 'HomeIndex',
