@@ -8,13 +8,13 @@ const router = createRouter({
     ...articalRoutes,
     ...bookRoutes,
     {
+      path: '/',
+      redirect: '/home'
+    },
+    {
       path: '/home',
       name: 'HomeIndex',
       component: () => import(/* webpackChunkName: "login" */'@/views/home/Index.vue'),
-    },
-    {
-      path: '/',
-      redirect: '/home'
     },
   ],
 })

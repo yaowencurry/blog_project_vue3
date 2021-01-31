@@ -2,7 +2,7 @@
   <div>
     <div
       class="artical-list p-top-20 p-bottom-20 m-top-20 m-bottom-20"
-      v-for="(item) in articalList"
+      v-for="(item) in data"
       :key="item.id"
       @click="handleDetail(item)"
     >
@@ -62,9 +62,12 @@ export default {
       'articalList', 'screeWidth'
     ])
   },
+  mounted() {
+    console.log(this.data)
+  },
   methods: {
-    handleDetail ({ id }) {
-      this.$router.push({ name: 'ArticalDetail', query: { id } })
+    handleDetail ({ articalid }) {
+      this.$router.push({ name: 'ArticalDetail', query: { articalid } })
     },
     handleSave (index) {
       this.$emit('save', index)

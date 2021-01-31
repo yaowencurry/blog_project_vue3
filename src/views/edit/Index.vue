@@ -6,16 +6,10 @@
         placeholder="请输入文章标题..."
         v-model="title"
       ></el-input>
-      <div
-        class="edit-title-btn"
-        @click="handleConfirm"
-      >立即发布</div>
+      <div class="edit-title-btn" @click="handleConfirm">立即发布</div>
     </div>
     <div class="edit-artical">
-      <div
-        class="edit-input"
-        @click="handleClick"
-      >
+      <div class="edit-input" @click="handleClick">
         <el-input
           type="textarea"
           ref="editInput"
@@ -25,22 +19,14 @@
           @input="editMarkDown"
         ></el-input>
       </div>
-      <div
-        v-html="markDownHtml"
-        class="markdown"
-      ></div>
+      <div v-html="markDownHtml" class="markdown"></div>
     </div>
     <div class="edit-footer">
-      <a
-        href="https://www.runoob.com/markdown/md-title.html"
-        target="__blank"
-      >了解markDown书写</a>
+      <a href="https://www.runoob.com/markdown/md-title.html" target="__blank"
+        >了解markDown书写</a
+      >
     </div>
-    <el-dialog
-      title="确定提交吗？"
-      v-model="dialogVisible"
-      width="30%"
-    >
+    <el-dialog title="确定提交吗？" v-model="dialogVisible" width="30%">
       <el-input
         v-model="detail"
         type="textarea"
@@ -49,10 +35,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button
-            type="primary"
-            @click="handleSubmit"
-          >确 定</el-button>
+          <el-button type="primary" @click="handleSubmit">确 定</el-button>
         </span>
       </template>
     </el-dialog>
@@ -60,73 +43,73 @@
 </template>
 
 <script>
-import showdown from 'showdown';
-import { ElInput, ElDialog } from 'element-plus';
-import { ref, onMounted } from 'vue';
-import { mapMutations } from 'vuex';
-import '@/assets/style/markdown.css';
+import showdown from "showdown";
+import { ElInput, ElDialog } from "element-plus";
+import { ref, onMounted } from "vue";
+import { mapMutations } from "vuex";
+import "@/assets/style/markdown.css";
 
 export default {
-  name: 'ArticalEdit',
+  name: "ArticalEdit",
   components: {
     ElInput,
-    ElDialog
+    ElDialog,
   },
-  setup () {
-    const markDownHtml = ref('');
-    const markDownCode = ref('');
-    const title = ref('');
-    const detail = ref('');
+  setup() {
+    const markDownHtml = ref("");
+    const markDownCode = ref("");
+    const title = ref("");
+    const detail = ref("");
     const dialogVisible = ref(false);
     var converter = new showdown.Converter();
-    function editMarkDown (code) {
+    function editMarkDown(code) {
       markDownHtml.value = converter.makeHtml(code);
     }
     onMounted(() => {
-      markDownCode.value = '*** \n# 一级标题 \n## 二级标题 \n### 三级标题\n`printf()`\n*斜体文本*\n_斜体文_\n**粗体文本**__粗体文本__\n***粗斜体文本***___粗斜体文本___\n```javascript\n$(document).\nready(function () {\n alert(123);\n});\n``` '
-    })
+      markDownCode.value =
+        "*** \n# 一级标题 \n## 二级标题 \n### 三级标题\n`printf()`\n*斜体文本*\n_斜体文_\n**粗体文本**__粗体文本__\n***粗斜体文本***___粗斜体文本___\n```javascript\n$(document).\nready(function () {\n alert(123);\n});\n``` ";
+    });
     return {
       markDownHtml,
       markDownCode,
       editMarkDown,
       title,
       dialogVisible,
-      detail
-    }
+      detail,
+    };
   },
   methods: {
-    ...mapMutations([
-      'SAVE_ARTICAL'
-    ]),
-    handleClick () {
-      this.$refs.editInput.focus()
+    ...mapMutations(["SAVE_ARTICAL"]),
+    handleClick() {
+      this.$refs.editInput.focus();
     },
-    handleConfirm () {
+    handleConfirm() {
       this.dialogVisible = true;
     },
-    handleSubmit () {
+    handleSubmit() {
       this.dialogVisible = false;
       const data = {
-        id: 'ART' + parseInt(Math.random() * 100000000000),
         title: this.title,
-        ctime: new Date().toLocaleString(),
-        author: 'yaowen',
+        author: "姚文",
         count: String(parseInt(Math.random() * 1000)),
-        timer: parseInt(Math.random() * 10) + 'min',
-        detail: this.detail,
-        prew: String(parseInt(Math.random() * 10000)),
-        save: '0',
-        comment: String(parseInt(Math.random() * 10000)),
-        isSave: '0',
+        readtimer: parseInt(Math.random() * 10),
         content: this.markDownHtml,
-        markDownCode: this.markDownCode
-      }
-      this.SAVE_ARTICAL(data);
-      this.$router.push({ name: 'HomeIndex' })
+        originmarkdown: this.markDownCode,
+        desc: this.detail
+      };
+      this.submitData(data)
+    },
+    submitData(data) {
+      this.$api
+      .ADD_ARTICAL(data)
+      .then((res) => {
+        if(res) {
+          this.$router.push({name:'HomeIndex'})
+        }
+      });
     }
-  }
-}
-
+  },
+};
 </script>
 <style src="../../assets/style/markdown.css"  scoped></style>
 <style scoped>

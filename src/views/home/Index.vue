@@ -1,48 +1,47 @@
 <template>
   <div class="index">
-    <artical-list
-      :data="data"
-      @save="handleSave"
-    ></artical-list>
+    <artical-list :data="data" @save="handleSave"></artical-list>
   </div>
 </template>
 
 <script>
-import ArticalList from '../../components/artical/artical-list'
-import { mapMutations, mapGetters } from 'vuex';
+import ArticalList from "../../components/artical/artical-list";
+import { mapMutations, mapGetters } from "vuex";
 export default {
-  name: 'HomeIndex',
+  name: "HomeIndex",
   components: {
     ArticalList,
   },
-  data () {
+  data() {
     return {
-      data: require('../../store/artical.json'),
-      list: []
-    }
+      data: [],
+      list: [],
+    };
   },
   computed: {
-    ...mapGetters(['articalList'])
+    ...mapGetters(["articalList"]),
   },
-  mounted () {
-    // localStorage.setItem('articalList', JSON.stringify([]));
-    if (this.articalList.length < 1) {
-      this.data.map(item => {
-        this.SAVE_ARTICAL(item)
-      })
-    }
+  mounted() {
+    this.getArticalList()
   },
   methods: {
-    ...mapMutations(['SAVE_ARTICAL']),
-    handleSave (index) {
-      if (this.articalList[index].isSave === '0') {
-        this.articalList[index].isSave = '1'
-        this.articalList[index].save = this.articalList[index].save * 1 + 1
+    ...mapMutations(["SAVE_ARTICAL"]),
+    getArticalList() {
+      this.$api.GET_ARTICAL_LIST().then((res) => {
+        if (res) {
+          console.log(res)
+          this.data = res;
+        }
+      });
+    },
+    handleSave(index) {
+      if (this.articalList[index].isSave === "0") {
+        this.articalList[index].isSave = "1";
+        this.articalList[index].save = this.articalList[index].save * 1 + 1;
       }
-    }
-  }
-}
-
+    },
+  },
+};
 </script>
 <style scoped>
 .index {

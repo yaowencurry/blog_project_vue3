@@ -14,6 +14,11 @@ app.use(bodyParser.json())
 
 
 
+
+//挂在路由
+app.use(articalRouter)
+
+
 app.get('/', (req, res) => {
   fs.readFile('./public/index.html', (err, data) => {
     if (err) throw err;
@@ -21,10 +26,6 @@ app.get('/', (req, res) => {
     res.send(data.toString())
   })
 })
-
-//挂在路由
-app.use(articalRouter)
-
 
 app.get('*', (req, res) => {
   fs.readFile('./public/index.html', (err, data) => {

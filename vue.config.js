@@ -31,6 +31,6 @@ module.exports = {
       }
     },
   },
-  publicPath: '/public/',
+  // publicPath: '/public/',//打包时静态资源放置在public文件夹下面
   productionSourceMap: false
 }
