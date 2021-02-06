@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="artical-menu"
+    class="artical-menu main-bg"
     :style="{ height: menuHeight + 'px'}"
   >
     <p class="menu-title">目录</p>
@@ -31,23 +31,19 @@ export default {
       menuHeight: 300
     }
   },
-  mounted() {
-
-  }
 }
 
 </script>
 <style scoped>
 .artical-menu {
   position: sticky;
-  top: 50px;
+  top: 18px;
   width: 24%;
   max-width: 400px;
   box-sizing: border-box;
   height: auto;
-  background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 .menu-title {
   font-size: 18px;
@@ -69,5 +65,10 @@ export default {
 .menu-item > a:hover {
   color: #333;
   text-decoration: none;
+}
+@media (prefers-color-scheme: dark) {
+  .menu-item:hover {
+    background-color: #666;
+  }
 }
 </style>

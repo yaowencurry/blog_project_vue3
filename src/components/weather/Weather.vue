@@ -1,10 +1,10 @@
 <template>
   <div class="w-flex container">
-    <span>{{data.city}}</span>
-    <span>{{data.date}}</span>
-    <span>{{data.wea}}</span>
-    <span>实时温度：{{data.tem}}℃</span>
-    <span>天气建议：{{data.air_tips}}</span>
+    <span class="main-active-color">{{data.city}}</span>
+    <span class="main-active-color">{{data.date}}</span>
+    <span class="main-active-color">{{data.wea}}</span>
+    <span class="main-active-color">实时温度：{{data.tem}}℃</span>
+    <span class="main-active-color">天气建议：{{data.air_tips}}</span>
   </div>
 </template>
 
@@ -43,8 +43,5 @@ export default {
   margin-bottom: 20px;
   background-color: #222222;
   z-index: 100;
-}
-.container span {
-  color: #fff;
 }
 </style>

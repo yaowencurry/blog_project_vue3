@@ -9,13 +9,46 @@ const router = createRouter({
     ...bookRoutes,
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/index/home'
     },
     {
-      path: '/home',
-      name: 'HomeIndex',
-      component: () => import(/* webpackChunkName: "login" */'@/views/home/Index.vue'),
+      path: '/index',
+      component: () => import(/* webpackChunkName: "Index" */'@/views/Index.vue'),
+      children: [{
+        path: '/index/home',
+        name: 'HomeIndex',
+        component: () => import(/* webpackChunkName: "HomeIndex" */'@/views/home/Index.vue'),
+        meta: {
+          title: '首页'
+        }
+      },{
+        path: '/index/apidoc',
+        name: 'ApiDoc',
+        component: ()=>import(/* webpackChunkName: "ApiDoc" */'@/views/apidoc/Index.vue'),
+        meta: {
+          title: '框架文档'
+        }
+      },{
+        path: '/index/source',
+        name: 'Source',
+        component: ()=>import(/* webpackChunkName: "Source" */'@/views/source/Index.vue'),
+        meta: {
+          title: '资源集合'
+        }
+      },{
+        path: '/index/function',
+        name: 'Function',
+        component: ()=>import(/* webpackChunkName: "Source" */'@/views/functions/Index.vue'),
+        meta: {
+          title: '函数工具库'
+        }
+      }]
     },
+    // {
+    //   path: '/home',
+    //   name: 'HomeIndex',
+    //   component: () => import(/* webpackChunkName: "login" */'@/views/home/Index.vue'),
+    // },
   ],
 })
 

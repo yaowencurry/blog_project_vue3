@@ -1,9 +1,15 @@
 <template>
-  <div id="detail" class="detail">
-    <div class="artical-detail">
+  <div
+    id="detail"
+    class="detail"
+  >
+    <div class="artical-detail main-bg">
       <bread-crumb></bread-crumb>
       <h1>{{ detail.title }}</h1>
-      <span class="p-bottom-20 d-block tips">{{ detail.ctime }}</span>
+      <div class="w-flex flex-start m-bottom-10">
+        <span class="d-block tips">{{ detail.ctime }}</span>
+        <EditButton :articalid="detail.articalid" />
+      </div>
       <div v-html="detail.content"></div>
       <artical-comment :data="detail"></artical-comment>
     </div>
@@ -20,41 +26,20 @@ import BreadCrumb from "../bread-crumb/BreadCrumb";
 import ArticalComment from "./artical-comment";
 import { mapGetters } from "vuex";
 import ArticalMenu from "./ArticalMenu";
-import { nextTick,reactive } from 'vue'
+import EditButton from '@/components/artical/EditButton'
 
 export default {
   name: "artical-detail",
-  async setup() {
-    await nextTick()
-    const titleList = Array.from(document.getElementById('detail').querySelectorAll('h2'));
-    console.log(titleList)
-    const menuList=reactive([])
-    titleList.forEach((item, index) => {
-        let obj = {
-          h3Name: "",
-          h4Children: [],
-        };
-        if (item.nodeName == "H3") {
-          obj.h3Name = item.innerHTML;
-          obj.href = "#data-h3-" + index;
-          item.setAttribute("id", "data-h3-" + index);
-          menuList.push(obj);
-        }
-      });
-      console.log(menuList)
-    return {
-      menuList
-    }
-  },
   components: {
     BreadCrumb,
     ArticalComment,
     ArticalMenu,
+    EditButton
   },
 
   computed: {
     ...mapGetters(["articalList", "screeWidth"]),
-    data() {
+    data () {
       let obj = {};
       const id = this.$route.query.id;
       this.articalList.map((item) => {
@@ -65,23 +50,42 @@ export default {
       return obj;
     },
   },
-  data() {
+  data () {
     return {
       menuList: [],
       detail: {},
     };
   },
-  mounted() {
-    this.getArticalDetail(this.$route.query.articalid);
+  async mounted () {
+    await this.getArticalDetail(this.$route.query.articalid);
   },
   methods: {
-    getArticalDetail(articalid) {
-      this.$api.GET_ARTICAL_DETAIL({ articalid }).then((res) => {
-        if (res.code === 200) {
-          this.detail = res.data;
+    getArticalDetail (articalid) {
+      this.$api.GET_ARTICAL_DETAIL({ articalid })
+        .then((res) => {
+          if (res.code === 200) {
+            this.detail = res.data;
+          }
+        })
+        .then(() => {
+          this.$nextTick(this.createMenuList())
+        })
+    },
+    createMenuList () {
+      const titleList = document.getElementById('detail').querySelectorAll('h2');
+      titleList.forEach((item, index) => {
+        let obj = {
+          h3Name: "",
+          h4Children: [],
+        };
+        if (item.nodeName == "H2") {
+          obj.h3Name = item.innerHTML;
+          obj.href = "#data-h3-" + index;
+          item.setAttribute("id", "data-h3-" + index);
+          this.menuList.push(obj);
         }
       });
-    },
+    }
   },
 };
 </script>
@@ -96,7 +100,6 @@ export default {
   .artical-detail {
     width: 70%;
     padding: 20px;
-    background-color: #fff;
     margin-right: 20px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }

@@ -1,15 +1,15 @@
 <template>
-  <div class="time">
-    <span class="time-date">{{
-      state.time.dayVal 
-      ? `${state.time.yearVal}年${state.time.monthVal}月${state.time.dateVal}日 周${state.time.dayVal}` 
-      : ''}}</span>
-    <span class="time-now">
+  <div class="time text-center">
+    <span class="time-now main-color">
       {{
       state.time.dayVal 
       ? `${state.time.hourVal}:${state.time.minVal}:${state.time.senVal}` 
       : ''}}
-    </span>
+    </span><br/>
+    <span class="time-date main-color">{{
+      state.time.dayVal 
+      ? `${state.time.yearVal}年${state.time.monthVal}月${state.time.dateVal}日 周${state.time.dayVal}` 
+      : ''}}</span>
   </div>
 </template>
 
@@ -52,22 +52,15 @@ export default {
 </script>
 <style scoped>
 .time {
-  position: sticky;
-  top: 0;
-  height: 40px;
   margin-bottom: 10px;
-  text-align: center;
-  background: #fafafa;
-  line-height: 40px;
-  box-shadow: 1px 2px 9px 1px rgba(0, 0, 0, 0.1);
 }
 .time-now,
 .time-date {
   font-weight: 500;
-  color: #3f84f1;
+  /* color: #333; */
 }
 .time-now {
   display: inline-block;
-  width: 70px;
+  font-size: 28px;
 }
 </style>

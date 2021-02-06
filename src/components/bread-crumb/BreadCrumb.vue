@@ -1,14 +1,20 @@
 <template>
   <div class="bread-crumb">
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ name: 'HomeIndex' }">首页</el-breadcrumb-item>
+    <el-breadcrumb
+      separator="/"
+      class="main-color"
+    >
+      <el-breadcrumb-item
+        :to="{ name: 'HomeIndex' }"
+        class="main-color"
+      >首页</el-breadcrumb-item>
       <el-breadcrumb-item>{{routeName}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
 
 <script>
-import {  ElBreadcrumb, ElBreadcrumbItem} from 'element-plus'
+import { ElBreadcrumb, ElBreadcrumbItem } from 'element-plus'
 
 export default {
   name: 'bread-crumb',
@@ -30,5 +36,10 @@ export default {
 }
 span {
   font-size: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :deep(.el-breadcrumb__inner.is-link) {
+    color: #fff;
+  }
 }
 </style>

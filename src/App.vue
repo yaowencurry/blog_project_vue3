@@ -1,76 +1,70 @@
 <template>
-  <div class="app">
-    <template v-if="isEditArtical">
-      <router-view></router-view>
-    </template>
-    <template v-else>
-      <div class="app__left">
-        <div
-          class="app__left__fixed"
-          v-if="screeWidth > 480 || mobileMenuShow"
-        >
-          <div>
-            <img
-              v-if="isLoad"
-              class="app__left__fixed--logo"
-              src="https://s3.ax1x.com/2020/12/11/rkhp5V.jpg"
-              alt=""
-            >
-            <div
-              class="app__left__fixed--logo default-logo"
-              v-else
-            >
-              <i class="iconfont icon-account"></i>
-            </div>
-            <h4 class="app__left__fixed--title">我的博客</h4>
+  <div class="app default-bg">
+    <div class="app__left">
+      <div
+        class="app__left__fixed"
+        v-if="screeWidth > 480 || mobileMenuShow"
+      >
+        <div>
+          <img
+            v-if="isLoad"
+            class="app__left__fixed--logo"
+            src="https://s3.ax1x.com/2020/12/11/rkhp5V.jpg"
+            alt=""
+          >
+          <div
+            class="app__left__fixed--logo default-logo"
+            v-else
+          >
+            <i class="iconfont icon-account"></i>
           </div>
-          <my-menu></my-menu>
-          <my-footer></my-footer>
+          <h4 class="app__left__fixed--title">我的博客</h4>
         </div>
+        <my-menu></my-menu>
+        <my-footer></my-footer>
       </div>
-      <div class="app__right">
-        <my-time></my-time>
-        <i
-          class="iconfont icon-menu"
-          v-if="screeWidth < 480"
-          @click="handleMenuShow"
-        ></i>
-        <i
-          class="iconfont icon-edit"
-          v-if="screeWidth < 480 && $route.name === 'HomeIndex'"
-          @click="handleEditArtical"
-        ></i>
-        <div
-          class="app__right__box"
-          @click="handleAppRight"
-        >
-          <router-view></router-view>
-        </div>
-        <div
-          class="back-top"
-          @click="backTop"
-        >
-          <i class="iconfont icon-top"></i>
-          <span v-if="screeWidth > 480">顶部</span>
-        </div>
+    </div>
+    <div class="app__right m-top-20 default-bg">
+      <!-- <my-time></my-time> -->
+      <i
+        class="iconfont icon-menu"
+        v-if="screeWidth < 480"
+        @click="handleMenuShow"
+      ></i>
+      <i
+        class="iconfont icon-edit"
+        v-if="screeWidth < 480 && $route.name === 'HomeIndex'"
+        @click="handleEditArtical"
+      ></i>
+      <div
+        class="app__right__box default-bg"
+        @click="handleAppRight"
+      >
+        <router-view></router-view>
       </div>
-    </template>
+      <!-- <div
+        class="back-top"
+        @click="backTop"
+      >
+        <i class="iconfont icon-top"></i>
+        <span v-if="screeWidth > 480">顶部</span>
+      </div> -->
+    </div>
   </div>
 </template>
 
 <script>
 import MyMenu from './components/common/IndexMenu';
 import MyFooter from './components/common/Footer';
-import MyTime from './components/time/MyTime';
 import { onMounted, ref } from 'vue';
 import { mapGetters } from 'vuex';
+import createStar from './utils/createStar'
 
 export default {
   name: 'App',
   components: {
     MyMenu,
     MyFooter,
-    MyTime
   },
   setup () {
     const isLoad = ref(false);
@@ -107,6 +101,13 @@ export default {
       this.isEditArtical = false;
     }
   },
+  mounted () {
+    this.$nextTick(() => {
+      window.addEventListener('click', (e) => {
+        createStar(e.pageX, e.pageY);
+      })
+    })
+  },
   watch: {
     $route (to) {
       if (to.name === 'EditArtical') {
@@ -119,7 +120,6 @@ export default {
   methods: {
     handleAppRight () {
       this.mobileMenuShow = false;
-      console.log(123);
     },
     handleMenuShow () {
       this.mobileMenuShow = !this.mobileMenuShow;
@@ -141,21 +141,19 @@ export default {
   display: flex;
   box-sizing: border-box;
 }
-.app__left {
+.app__left,
+.app__left__fixed {
   height: 100vh;
-  width: 20%;
-  max-width: 500px;
+  width: 17%;
+  max-width: 250px;
 }
 .app__left__fixed {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 500px;
   background-color: #333333;
   text-align: center;
 }
@@ -178,13 +176,12 @@ export default {
   font-size: 45px;
 }
 .app__left__fixed--title {
-  color: #fff;
   font-weight: 500;
   margin: 0 0 15%;
+  color: #fff;
 }
 .app__right {
-  background-color: #f4f5f5;
-  width: 80%;
+  width: 83%;
   box-sizing: border-box;
 }
 .app__right__box {

@@ -5,11 +5,7 @@
   padding-top: 16px;
   margin-bottom: 4px;
 }
-:deep(h2,
-h3,
-h4,
-h5,
-h6) {
+:deep(h2, h3, h4, h5, h6) {
   border-bottom: 1px solid #e0e0e0;
   padding-bottom: 5px;
   line-height: 1.5em;
@@ -19,7 +15,7 @@ h6) {
 }
 :deep(h2) {
   font-size: 1.4em;
-  margin: 40px 10px 20px 0;
+  margin: 20px 10px 20px 0;
   /* padding-left: 9px; */
   /* border-left: 6px solid #ff7e79; */
   font-weight: 700;
@@ -44,8 +40,7 @@ h6) {
   margin: 10px 0 5px;
   padding-top: 10px;
 }
-:deep(h5,
-h6) {
+:deep(h5, h6) {
   font-size: 0.9em;
 }
 :deep(h5) {
@@ -63,9 +58,7 @@ h6) {
   margin-bottom: 15px;
   height: auto;
 }
-:deep(dl,
-ol,
-ul) {
+:deep(dl, ol, ul) {
   margin-top: 12px;
   margin-bottom: 20px;
   padding-left: 5%;
@@ -121,16 +114,14 @@ ul) {
   position: absolute;
   bottom: -31px;
 }
-:deep(strong,
-dfn) {
+:deep(strong, dfn) {
   font-weight: 700;
 }
-:deep(em,
-dfn) {
+:deep(em, dfn) {
   font-style: italic;
   font-weight: 400;
 }
-:deep(el ){
+:deep(el) {
   text-decoration: line-through;
 }
 /*code {font-size:90%;}*/
@@ -146,7 +137,7 @@ dfn) {
   border-radius: 4px;
   white-space: pre-wrap;
   display: block;
-  background: #f8f8f8;
+  background: #222;
   padding: 10px 20px;
   border: none;
   margin-bottom: 25px;
@@ -155,7 +146,7 @@ dfn) {
 }
 :deep(code) {
   color: #c7254e;
-  background-color: #f9f2f4;
+  /* background-color: #f9f2f4; */
   border-radius: 4px;
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
   padding: 2px 4px;
@@ -186,8 +177,7 @@ dfn) {
   border: 0;
   border-top: 1px solid #eee;
 }
-:deep(ol p,
-ul p) {
+:deep(ol p, ul p) {
   margin-bottom: 0px;
 }
 :deep(li) {
@@ -241,9 +231,7 @@ ul p) {
     background-color: none;
   }
 }
-:deep(a:target,
-ol#footnotes li:target,
-sup a:target) {
+:deep(a:target, ol#footnotes li:target, sup a:target) {
   animation-name: highfade;
   animation-duration: 2s;
   animation-iteration-count: 1;
@@ -270,4 +258,29 @@ sup a:target) {
 :deep(a:target) {
   border: 0;
   outline: 0;
+}
+@media (prefers-color-scheme: dark) {
+  :deep(h1, h2, h3, h4, h5, h6) {
+    color: #fff;
+  }
+  :deep(h1),
+  :deep(h2),
+  :deep(h3),
+  :deep(h4),
+  :deep(h5),
+  :deep(h6),
+  :deep(p),
+  :deep(dl, ol, ul),
+  :deep(a),
+  :deep(strong, dfn),
+  :deep(em, dfn),
+  :deep(el){
+    color: #eee !important;
+  }
+  :deep(pre) {
+    background-color: #666;
+  }
+  :deep(code) {
+    color: #eee;
+  }
 }

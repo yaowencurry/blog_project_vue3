@@ -1,141 +1,66 @@
 <template>
-  <div class="app">
-    <div class="app__left">
-      <div class="app__left__fixed">
-        <div>
-          <img
-            v-if="isLoad"
-            class="app__left__fixed--logo"
-            src="https://s3.ax1x.com/2020/12/11/rkhp5V.jpg"
-            alt=""
-          >
-          <div
-            class="app__left__fixed--logo default-logo"
-            v-else
-          >
-            <i class="iconfont icon-account"></i>
-          </div>
-          <h4 class="app__left__fixed--title">我的博客</h4>
-        </div>
-        <my-menu></my-menu>
-        <my-footer></my-footer>
-      </div>
+  <div class="index w-flex">
+    <div class="index_left">
+      <router-view></router-view>
     </div>
-    <div class="app__right">
-      <my-time></my-time>
-      <div class="app__right__box">
-        <router-view></router-view>
+    <div class="index_right main-bg p-top-10 border-box">
+      <div class="p-top-10 p-left-10 p-right-10">
+        <Clock />
+        <MyTime />
       </div>
+      <HotArticalList />
       <div
-        class="back-top"
+        class="text-center main-color p-top-10 p-bottom-10 border-top cursor-p"
+        style="font-size: 12px;"
         @click="backTop"
-      >
-        <i class="iconfont icon-top"></i>
-        <span>顶部</span>
-      </div>
+      >回到顶部</div>
     </div>
   </div>
 </template>
 
 <script>
-import MyMenu from '../components/common/IndexMenu';
-import MyFooter from '../components/common/Footer';
-import MyTime from '../components/time/MyTime';
-import { onMounted, ref } from 'vue';
+// import { defineAsyncComponent } from 'vue';
+
+import MyTime from '../components/time/MyTime'
+import Clock from '../components/time/Clock';
+import HotArticalList from '../components/artical/HotArticalList';
+// const MyTime = defineAsyncComponent({
+//   loader: () => import('../components/time/MyTime'),
+// })
+// const Clock = defineAsyncComponent({
+//   loader: () => import('../components/time/Clock'),
+// })
+
 
 export default {
   name: 'App',
   components: {
-    MyMenu,
-    MyFooter,
-    MyTime
+    MyTime,
+    Clock,
+    HotArticalList
   },
   setup () {
-    const isLoad = ref(false);
-    const isTop = ref(false);
-    onMounted(() => {
-      setTimeout(() => {
-        isLoad.value = true;
-      }, 2000)
-    })
     function backTop () {
       scrollTo(0, 0);
     }
     return {
       backTop,
-      isLoad,
-      isTop
     }
   }
 }
 </script>
 
 <style>
-.app {
-  display: flex;
+.index {
+  align-items: flex-start;
   box-sizing: border-box;
 }
-.app__left {
-  height: 100vh;
-  width: 20%;
-  max-width: 500px;
-}
-.app__left__fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  max-width: 500px;
-  background-color: #333333;
-  text-align: center;
-}
-.app__left__fixed--logo {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin: 20% 0 20px;
-}
-.default-logo {
-  margin: 20% auto 20px auto;
-  color: #999;
-  border: 1px solid #999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-.default-logo i {
-  font-size: 45px;
-}
-.app__left__fixed--title {
-  color: #fff;
-  font-weight: 500;
-  margin: 0 0 15%;
-}
-.app__right {
-  background-color: #fafafa;
-  width: 80%;
+.index_left {
+  width: 75%;
   box-sizing: border-box;
+  margin-right: 20px;
 }
-.app__right__box {
-  width: 85%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.back-top {
-  position: fixed;
-  bottom: 30px;
-  right: 20px;
-  cursor: pointer;
-}
-.back-top span,
-.back-top i {
-  color: #3f84f1;
-  font-size: 12px;
-  font-weight: 500;
+.index_right {
+  width: 25%;
 }
 </style>

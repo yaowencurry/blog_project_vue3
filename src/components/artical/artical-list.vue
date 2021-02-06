@@ -1,56 +1,44 @@
 <template>
   <div>
-    <div
-      class="artical-list p-top-20 p-bottom-20 m-top-20 m-bottom-20"
-      v-for="(item) in data"
-      :key="item.id"
-      @click="handleDetail(item)"
-    >
-      <h2 class="pointer white title">{{item.title}}</h2>
+    <template v-if="data.length > 0">
       <div
-        class="artical-cal"
-        v-if="screeWidth <= 480"
-      >
-        <span class="white tips">发表时间：{{item.ctime}}</span>
-        <span class="white tips"> | </span>
-        <span class="white tips">作者：{{item.author}}</span>
-      </div>
-      <div
-        class="artical-cal"
-        v-if="screeWidth > 480"
-      >
-        <span class="white tips">发表时间：{{item.ctime}}</span>
-        <span class="white tips"> | </span>
-        <span class="white tips">作者：{{item.author}}</span>
-        <span class="white tips"> | </span>
-        <span class="white tips">字数统计：{{item.count}}</span>
-        <span class="white tips"> | </span>
-        <span class="white tips">阅读时长：{{item.timer}}</span>
-      </div>
-      <!-- <p class="artical-list__content p-20 border-box white">{{ screeWidth > 480 ? item.detail : item.detail.slice(0,40) + '...'}}</p> -->
-      <p class="artical-list__content p-20 border-box white">{{ screeWidth > 480 ? item.detail : item.detail.slice(0,60) + '...'}}</p>
-      <!-- <div
-        v-if="screeWidth > 480"
-        class="m-auto btn detail-btn"
+        class="artical-list p-top-20 p-bottom-20 m-top-20 m-bottom-20 main-bg"
+        v-for="(item) in data"
+        :key="item.id"
         @click="handleDetail(item)"
-      >查看详情</div> -->
-      <!-- <artical-comment
-        :data="{...item,index}"
-        @save="handleSave"
-      ></artical-comment> -->
-    </div>
+      >
+        <h2 class="pointer main-color title">{{item.title}}</h2>
+        <div
+          class="artical-cal"
+          v-if="screeWidth <= 480"
+        >
+          <span class="main-color tips">发表时间：{{item.ctime}}</span>
+          <span class="main-color tips"> | </span>
+          <span class="main-color tips">作者：{{item.author}}</span>
+        </div>
+        <div
+          class="artical-cal"
+          v-if="screeWidth > 480"
+        >
+          <span class="main-color tips">发表时间：{{item.ctime}}</span>
+          <span class="main-color tips"> | </span>
+          <span class="main-color tips">作者：{{item.author}}</span>
+        </div>
+        <p class="artical-list__content p-20 border-box main-color">{{ screeWidth > 480 ? item.desc : item.desc.slice(0,60) + '...'}}</p>
+      </div>
+    </template>
+    <div
+      v-else
+      class="p-20 text-center font-size-12"
+    >我是有底线的，没有数据呢...</div>
   </div>
 </template>
 
 <script>
-// import ArticalComment from '../artical/artical-comment'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'artical-list',
-  // components: {
-  //   ArticalComment
-  // },
   props: {
     data: {
       type: Array,
@@ -59,31 +47,30 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'articalList', 'screeWidth'
+      'screeWidth'
     ])
-  },
-  mounted() {
-    console.log(this.data)
   },
   methods: {
     handleDetail ({ articalid }) {
       this.$router.push({ name: 'ArticalDetail', query: { articalid } })
     },
-    handleSave (index) {
-      this.$emit('save', index)
-    }
   }
 }
 
 </script>
 <style  scoped>
-span.tips {
+/* span.tips {
   color: #999;
-}
+} */
 .artical-list:hover {
   background: #fdfdfd;
   cursor: pointer;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+@media (prefers-color-scheme: dark) {
+  .artical-list:hover {
+    background: #252526;
+  }
 }
 .artical-list {
   width: 100%;
@@ -97,7 +84,7 @@ span.tips {
 .artical-list__content {
   /* height: 90px; */
   line-height: 1.7;
-  color: #333;
+  /* color: #333; */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -106,17 +93,17 @@ span.tips {
 }
 .detail-btn {
   background-color: #333;
-  color: #fff;
   text-align: center;
 }
-.white {
+/* .main-color {
   color: #333;
-}
+} */
 .title {
   text-align: left;
   font-weight: 500;
   margin-bottom: 5px;
-  color: #000;
+  /* color: #000; */
+  font-size: 18px;
 }
 @media screen and (max-width: 480px) {
   .artical-list__content {

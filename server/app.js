@@ -4,6 +4,7 @@ const fs = require('fs');
 
 //路由
 const articalRouter = require('./router/artical');
+const commentRouter = require('./router/comment');
 
 
 var app = express();
@@ -17,6 +18,7 @@ app.use(bodyParser.json())
 
 //挂在路由
 app.use(articalRouter)
+app.use(commentRouter)
 
 
 app.get('/', (req, res) => {

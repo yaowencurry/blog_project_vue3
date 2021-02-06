@@ -16,7 +16,7 @@ module.exports = {
         pathRewrite: {
           // '^/api5'是一个正则表达式，表示要匹配请求的url中，全部'http://localhost:8081/api5' 转接为 http://localhost:8081/api/
           //重写路径 比如'/api/aaa/ccc'重写为'/aaa/ccc'
-          '^/api': '/'
+          '^/api': ''
         }
       },
       '/pmom': {
@@ -31,6 +31,44 @@ module.exports = {
       }
     },
   },
-  // publicPath: '/public/',//打包时静态资源放置在public文件夹下面
-  productionSourceMap: false
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/public/',//打包时静态资源放置在public文件夹下面
+  productionSourceMap: false,
+  chainWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      // 启动时动态创建一个html：http://localhost:8888/report.html
+      // config.plugin('webpack-bundle-analyzer').use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+      // 生成一个静态html，report.html
+      config.plugin('webpack-report').use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [
+        {
+          analyzerMode: 'static'
+        }
+      ]);
+    }
+  },
+  configureWebpack: config => {
+    config.externals = {
+      vue: "Vue",
+      "vue-router": "VueRouter",
+      vuex: "Vuex",
+      'axios': 'axios',
+      'showdown': 'showdown'
+    }
+    config.optimization = {
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          'element-plus': {
+            name: 'element-plus',
+            test: /[\\/]node_modules[\\/]element-plus[\\/]/,
+            priority: -10
+          },
+          'vendors': {
+            name: 'vendors',
+            test: /[\\/]node_modules[\\/]/,
+            priority: -20
+          }
+        }
+      }
+    }
+  }
 }

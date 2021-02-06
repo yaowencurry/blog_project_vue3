@@ -4,6 +4,7 @@
       v-for="(item,index) in state.menuList"
       :key="index"
       :class="{'menu-list-active': item.route == activeRoute}"
+      class="menu-list-item"
       @click="handleMenu(item.route)"
     >{{item.text}}</li>
   </ul>
@@ -21,8 +22,16 @@ export default {
           text: '首页'
         },
         {
-          route: 'BookIndex',
-          text: '电子书'
+          route: 'ApiDoc',
+          text: '框架文档'
+        },
+        {
+          route: 'Source',
+          text: '资源集合'
+        },
+        {
+          route: 'Function',
+          text: '工具函数库'
         },
         {
           route: 'EditArtical',
@@ -74,18 +83,9 @@ li {
   padding: 7px 0;
   font-size: 14px;
   cursor: pointer;
-  color: #fff;
   text-align: center;
-  
-}
-li:hover,
-li:active {
-  background-color: #fafafa;
-  color: #333 !important;
 }
 .menu-list-active {
   font-weight: 500;
-  background-color: #fafafa;
-  color: #333 !important;
 }
 </style>

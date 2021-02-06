@@ -2,7 +2,7 @@
   <div>
     <div class="mine-git">
       <i
-        class="iconfont icon-github"
+        class="iconfont icon-github greay-color"
         @click="handleOpen"
       ></i>
       <i
@@ -26,6 +26,7 @@
         <a
           :href="item.href"
           target="_blank"
+          class="greay-color"
         >{{item.name}}</a>
       </li>
 
@@ -92,7 +93,6 @@ li {
   padding: 5px;
 }
 a:hover {
-  color: #fff;
   text-decoration: underline;
 }
 .design {
@@ -108,9 +108,6 @@ a:hover {
   padding: 0 8px;
   cursor: pointer;
   color: #ddd;
-}
-.mine-git i:hover {
-  color: #fff;
 }
 .icon-weixin {
   color: #06ac2c !important;
