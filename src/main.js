@@ -9,6 +9,7 @@ import {
   ElTabs,
   ElTabPane,
   ElSelect,
+  ElSkeleton
 } from 'element-plus';
 import './assets/style/global.css'
 import './assets/style/iconfont/iconfont.css'
@@ -21,7 +22,8 @@ const components = [
   ElButton,
   ElTabs,
   ElTabPane,
-  ElSelect
+  ElSelect,
+  ElSkeleton
 ]
 
 const app = createApp(App)

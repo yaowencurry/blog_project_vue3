@@ -6,17 +6,17 @@ const getJueJinArtical = require('../utils/getHotArtical')
 const router = express.Router();
 
 router.get('/artical/articallist', (req, res) => {
-  const { condition = '', status = '1', articalclass = '1' } = req.query;
+  const { condition = '', status = '1', articalclass = '1', type='' } = req.query;
 
   let SQL = '';
   let SQLVALUE = null;
 
   if (condition) {
-    SQL = 'SELECT `articalid`,`title`,`ctime`,`author`,`count`,`readtimer`,`desc`,`prew` FROM artical WHERE (`title` LIKE ? OR `desc` LIKE ?) AND `status` = ? AND `articalclass` = ? ORDER BY `ctime` DESC';
-    SQLVALUE = [`%${condition}%`, `%${condition}%`, status, articalclass];
+    SQL = 'SELECT `articalid`,`title`,`ctime`,`author`,`count`,`readtimer`,`desc`,`prew` FROM artical WHERE (`title` LIKE ? OR `desc` LIKE ?) AND `status` = ? AND `articalclass` = ? AND `type` LIKE ? ORDER BY `ctime` DESC';
+    SQLVALUE = [`%${condition}%`, `%${condition}%`, status, articalclass, `%${type}%`];
   } else {
-    SQL = 'SELECT `articalid`,`title`,`ctime`,`author`,`count`,`readtimer`,`desc`,`prew` FROM artical WHERE `status` = ? AND `articalclass` = ? ORDER BY `ctime` DESC';
-    SQLVALUE = [status, articalclass]
+    SQL = 'SELECT `articalid`,`title`,`ctime`,`author`,`count`,`readtimer`,`desc`,`prew` FROM artical WHERE `status` = ? AND `articalclass` = ? AND `type` LIKE ? ORDER BY `ctime` DESC';
+    SQLVALUE = [status, articalclass, `%${type}%`]
   }
 
   db.query(SQL, SQLVALUE, (err, data) => {

@@ -4,7 +4,7 @@
       class="function-title w-flex p-10 cursor-p font-size-14"
       @click="handleDetail"
     >
-      <p class="bolder">{{info.title}}
+      <p class="bolder main-color">{{info.title}}
         <EditButton :articalid="info.articalid" />
       </p>
       <p class="greay-color font-size-12">{{info.ctime}}</p>
@@ -61,7 +61,9 @@ export default {
 </script>
 
 <style scoped>
-.function-title:hover {
-  background-color: #eee;
+@media (prefers-color-scheme: light) {
+  .function-title:hover {
+    background-color: #eee;
+  }
 }
 </style>

@@ -192,6 +192,15 @@ export default {
       }, {
         value: '3',
         label: 'JAVASCRIPT',
+      },{
+        value: '4',
+        label: 'Node Js',
+      },{
+        value: '5',
+        label: 'Vue',
+      },{
+        value: '6',
+        label: 'React',
       }]
     },
     classoptions () {
@@ -224,8 +233,8 @@ export default {
     }
   },
   async created () {
-    await this.getHalfArticalList();
     this.isAdmin = this.$store.state.artical.isAdmin;
+    await this.getHalfArticalList();
     const { articalid } = this.$route.query;
     articalid ? this.getArticalDetail(articalid) : false
   },

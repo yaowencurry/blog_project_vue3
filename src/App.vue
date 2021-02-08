@@ -7,17 +7,10 @@
       >
         <div>
           <img
-            v-if="isLoad"
             class="app__left__fixed--logo"
-            src="https://s3.ax1x.com/2020/12/11/rkhp5V.jpg"
+            src="./assets/image/logo.png"
             alt=""
           >
-          <div
-            class="app__left__fixed--logo default-logo"
-            v-else
-          >
-            <i class="iconfont icon-account"></i>
-          </div>
           <h4 class="app__left__fixed--title">我的博客</h4>
         </div>
         <my-menu></my-menu>
@@ -40,15 +33,11 @@
         class="app__right__box default-bg"
         @click="handleAppRight"
       >
-        <router-view></router-view>
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive"  transition-mode="in-out"></router-view>
+        </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive"  transition-mode="out-in"></router-view>
       </div>
-      <!-- <div
-        class="back-top"
-        @click="backTop"
-      >
-        <i class="iconfont icon-top"></i>
-        <span v-if="screeWidth > 480">顶部</span>
-      </div> -->
     </div>
   </div>
 </template>
@@ -56,32 +45,14 @@
 <script>
 import MyMenu from './components/common/IndexMenu';
 import MyFooter from './components/common/Footer';
-import { onMounted, ref } from 'vue';
 import { mapGetters } from 'vuex';
-import createStar from './utils/createStar'
+// import createStar from './utils/createStar'
 
 export default {
   name: 'App',
   components: {
     MyMenu,
     MyFooter,
-  },
-  setup () {
-    const isLoad = ref(false);
-    const isTop = ref(false);
-    onMounted(() => {
-      setTimeout(() => {
-        isLoad.value = true;
-      }, 2000)
-    })
-    function backTop () {
-      scrollTo(0, 0);
-    }
-    return {
-      backTop,
-      isLoad,
-      isTop,
-    }
   },
   data () {
     return {
@@ -101,13 +72,15 @@ export default {
       this.isEditArtical = false;
     }
   },
-  mounted () {
-    this.$nextTick(() => {
-      window.addEventListener('click', (e) => {
-        createStar(e.pageX, e.pageY);
-      })
-    })
-  },
+  // mounted () {
+  //   this.$nextTick(() => {
+  //     // let appRight = document.querySelector('.app__right');
+
+  //     window.addEventListener('click', (e) => {
+  //       createStar(e.clientX, e.clientY);
+  //     })
+  //   }, false)
+  // },
   watch: {
     $route (to) {
       if (to.name === 'EditArtical') {

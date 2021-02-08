@@ -13,11 +13,18 @@
         ></el-button>
       </template>
     </el-input>
-    <FunctionItem
-      v-for="item in data"
-      :key="item.articalid"
-      :info="item"
+    <el-skeleton
+      :rows="8"
+      animated
+      v-if="isLoging"
     />
+    <template v-else>
+      <FunctionItem
+        v-for="item in data"
+        :key="item.articalid"
+        :info="item"
+      />
+    </template>
   </div>
 </template>
 
@@ -40,7 +47,8 @@ export default {
   },
   data () {
     return {
-      data: []
+      data: [],
+      isLoging: true
     }
   },
   mounted () {
@@ -48,10 +56,11 @@ export default {
   },
   methods: {
     getFunctionsList () {
+      this.isLoging = true;
       this.$api.GET_ARTICAL_LIST({ articalclass: '2', condition: this.condition }).then((res) => {
         if (res) {
           this.data = res;
-          console.log(res);
+          this.isLoging = false;
         }
       });
     },

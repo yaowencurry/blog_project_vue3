@@ -25,10 +25,10 @@ export default {
           route: 'ApiDoc',
           text: '框架文档'
         },
-        {
-          route: 'Source',
-          text: '资源集合'
-        },
+        // {
+        //   route: 'Source',
+        //   text: '资源集合'
+        // },
         {
           route: 'Function',
           text: '工具函数库'

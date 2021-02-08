@@ -19,7 +19,8 @@ const router = createRouter({
         name: 'HomeIndex',
         component: () => import(/* webpackChunkName: "HomeIndex" */'@/views/home/Index.vue'),
         meta: {
-          title: '首页'
+          title: '首页',
+          keepAlive: true
         }
       },{
         path: '/index/apidoc',

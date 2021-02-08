@@ -4,14 +4,33 @@
     class="detail"
   >
     <div class="artical-detail main-bg">
-      <bread-crumb></bread-crumb>
-      <h1>{{ detail.title }}</h1>
-      <div class="w-flex flex-start m-bottom-10">
-        <span class="d-block tips">{{ detail.ctime }}</span>
-        <EditButton :articalid="detail.articalid" />
+      <div class="p-20">
+        <el-skeleton
+          :rows="15"
+          animated
+          v-if="isLoging"
+        />
+        <template v-else>
+          <bread-crumb></bread-crumb>
+          <h1>{{ detail.title }}</h1>
+          <div class="w-flex flex-start m-bottom-10">
+            <span class="d-block tips">{{ detail.ctime }}</span>
+            <EditButton :articalid="detail.articalid" />
+          </div>
+          <div v-html="detail.content"></div>
+        </template>
       </div>
-      <div v-html="detail.content"></div>
-      <artical-comment :data="detail"></artical-comment>
+      <ArticalComment
+        :articalid="articalid"
+        @comment="getCommentList(articalid)"
+      />
+      <div class="p-right-20 p-left-20 p-bottom-20">
+        <CommentList
+          v-for="item in commentList"
+          :key="item.commentid"
+          :info="item"
+        />
+      </div>
     </div>
     <ArticalMenu
       :mark-down="detail.originmarkdown"
@@ -23,10 +42,11 @@
 
 <script>
 import BreadCrumb from "../bread-crumb/BreadCrumb";
-import ArticalComment from "./artical-comment";
 import { mapGetters } from "vuex";
 import ArticalMenu from "./ArticalMenu";
 import EditButton from '@/components/artical/EditButton'
+import ArticalComment from './ArticalComment';
+import CommentList from './CommentList';
 
 export default {
   name: "artical-detail",
@@ -34,7 +54,8 @@ export default {
     BreadCrumb,
     ArticalComment,
     ArticalMenu,
-    EditButton
+    EditButton,
+    CommentList
   },
 
   computed: {
@@ -49,17 +70,31 @@ export default {
       });
       return obj;
     },
+    articalid () {
+      return this.$route.query.articalid;
+    }
   },
   data () {
     return {
       menuList: [],
       detail: {},
+      commentList: [],
+      isLoging: true
     };
   },
   async mounted () {
-    await this.getArticalDetail(this.$route.query.articalid);
+    await this.getArticalDetail(this.articalid);
+    await this.getCommentList(this.articalid);
   },
   methods: {
+    getCommentList (articalid) {
+      this.$api.GET_COMMENT_LIST({ articalid })
+        .then(res => {
+          if (res.code === 200) {
+            this.commentList = res.data;
+          }
+        })
+    },
     getArticalDetail (articalid) {
       this.$api.GET_ARTICAL_DETAIL({ articalid })
         .then((res) => {
@@ -69,6 +104,7 @@ export default {
         })
         .then(() => {
           this.$nextTick(this.createMenuList())
+          this.isLoging = false
         })
     },
     createMenuList () {
@@ -99,7 +135,6 @@ export default {
   }
   .artical-detail {
     width: 70%;
-    padding: 20px;
     margin-right: 20px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }

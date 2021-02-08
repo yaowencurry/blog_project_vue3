@@ -8,7 +8,7 @@
         class="w-18 d-inline-bolck main-active-color font-size-14 border-box p-top-10 p-bottom-10 cursor-p border-radius-5"
         :style="{background: item.color}"
         :href="item.href"
-        target="__blank"
+        target="_blank"
       >{{item.name}}</a>
     </div>
   </div>

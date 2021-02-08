@@ -19,17 +19,10 @@
 </template>
 
 <script>
-// import { defineAsyncComponent } from 'vue';
 
 import MyTime from '../components/time/MyTime'
 import Clock from '../components/time/Clock';
 import HotArticalList from '../components/artical/HotArticalList';
-// const MyTime = defineAsyncComponent({
-//   loader: () => import('../components/time/MyTime'),
-// })
-// const Clock = defineAsyncComponent({
-//   loader: () => import('../components/time/Clock'),
-// })
 
 
 export default {
@@ -61,6 +54,8 @@ export default {
   margin-right: 20px;
 }
 .index_right {
+  position: sticky;
+  top: 20px;
   width: 25%;
 }
 </style>

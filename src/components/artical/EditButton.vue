@@ -14,7 +14,7 @@ export default {
   name: 'EditButton',
   props: {
     articalid: {
-      type: String,
+      type: Number,
       required: true
     }
   }
