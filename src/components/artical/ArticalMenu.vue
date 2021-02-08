@@ -52,6 +52,7 @@ export default {
   font-weight: 500;
 }
 .menu-item {
+  list-style: none;
   padding: 3px 10px;
   margin: 0;
   font-weight: 500;

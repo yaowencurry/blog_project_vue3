@@ -183,6 +183,7 @@
 :deep(li) {
   margin-bottom: 0.75em;
   margin-top: 0.75em;
+  margin-left: 1.75em;
 }
 :deep(ol#footnotes) {
   font-size: 0.95em;

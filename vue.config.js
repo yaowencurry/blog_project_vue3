@@ -51,7 +51,7 @@ module.exports = {
       "vue-router": "VueRouter",
       vuex: "Vuex",
       'axios': 'axios',
-      'showdown': 'showdown'
+      'showdown': 'showdown',
     }
     config.optimization = {
       splitChunks: {
@@ -60,6 +60,11 @@ module.exports = {
           'element-plus': {
             name: 'element-plus',
             test: /[\\/]node_modules[\\/]element-plus[\\/]/,
+            priority: -10
+          },
+          'core-js': {
+            name: 'core-js',
+            test: /[\\/]node_modules[\\/]core-js[\\/]/,
             priority: -10
           },
           'vendors': {

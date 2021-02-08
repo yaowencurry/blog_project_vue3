@@ -1,10 +1,8 @@
 import { createStore } from 'vuex'
 import artical from './moudles/artical'
-import city from './moudles/city'
 
 const modules = {
   artical,
-  city
 }
 
 export default createStore({

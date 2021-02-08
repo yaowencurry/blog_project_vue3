@@ -181,10 +181,10 @@ a {
   background-color: #222222;
   border: none;
 } */
-li {
+/* li {
   text-decoration: none;
   list-style: none;
-}
+} */
 
 .border-bottom {
   border-bottom: 1px solid #cccbcb;

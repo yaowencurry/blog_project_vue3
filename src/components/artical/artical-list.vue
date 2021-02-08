@@ -12,7 +12,7 @@
           class="artical-cal"
           v-if="screeWidth <= 480"
         >
-          <span class="main-color tips">发表时间：{{item.ctime}}</span>
+          <span class="main-color tips">更新时间：{{item.ctime}}</span>
           <span class="main-color tips"> | </span>
           <span class="main-color tips">作者：{{item.author}}</span>
         </div>
@@ -24,7 +24,7 @@
           <span class="main-color tips"> | </span>
           <span class="main-color tips">作者：{{item.author}}</span>
         </div>
-        <p class="artical-list__content p-20 border-box main-color">{{ screeWidth > 480 ? item.desc : item.desc.slice(0,60) + '...'}}</p>
+        <p class="artical-list__content p-top-10 border-box main-color font-size-14">{{ screeWidth > 480 ? item.desc : item.desc.slice(0,60) + '...'}}</p>
       </div>
     </template>
     <div
@@ -89,7 +89,7 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  padding: 10px 0;
+  /* padding: 10px 0; */
 }
 .detail-btn {
   background-color: #333;

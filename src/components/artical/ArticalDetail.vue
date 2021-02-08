@@ -15,9 +15,9 @@
           <h1>{{ detail.title }}</h1>
           <div class="w-flex flex-start m-bottom-10">
             <span class="d-block tips">{{ detail.ctime }}</span>
-            <EditButton :articalid="detail.articalid" />
+            <EditButton :articalid="detail.articalid" style="margin-left: 6px"/>
           </div>
-          <div v-html="detail.content"></div>
+          <DetailHtml :content="detail.content" />
         </template>
       </div>
       <ArticalComment
@@ -47,6 +47,7 @@ import ArticalMenu from "./ArticalMenu";
 import EditButton from '@/components/artical/EditButton'
 import ArticalComment from './ArticalComment';
 import CommentList from './CommentList';
+import DetailHtml from './DetailHtml'
 
 export default {
   name: "artical-detail",
@@ -55,11 +56,12 @@ export default {
     ArticalComment,
     ArticalMenu,
     EditButton,
-    CommentList
+    CommentList,
+    DetailHtml
   },
 
   computed: {
-    ...mapGetters(["articalList", "screeWidth"]),
+    ...mapGetters(["screeWidth"]),
     data () {
       let obj = {};
       const id = this.$route.query.id;
@@ -103,12 +105,15 @@ export default {
           }
         })
         .then(() => {
-          this.$nextTick(this.createMenuList())
           this.isLoging = false
+          this.$nextTick(this.createMenuList)
         })
     },
     createMenuList () {
-      const titleList = document.getElementById('detail').querySelectorAll('h2');
+      let titleList = document.getElementById('detail').querySelectorAll('h2');
+      if ([...titleList].length < 1) {
+        titleList = document.getElementById('detail').querySelectorAll('h1');
+      }
       titleList.forEach((item, index) => {
         let obj = {
           h3Name: "",
@@ -125,8 +130,7 @@ export default {
   },
 };
 </script>
-<style src="../../assets/style/markdown.css"  scoped>
-</style>
+
 <style scoped>
 @media screen and (min-width: 480px) {
   .detail {

@@ -8,7 +8,7 @@
         <div>
           <img
             class="app__left__fixed--logo"
-            src="./assets/image/logo.png"
+            src="./assets/image/logo.jpeg"
             alt=""
           >
           <h4 class="app__left__fixed--title">我的博客</h4>
