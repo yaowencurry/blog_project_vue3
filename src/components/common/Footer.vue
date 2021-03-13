@@ -74,6 +74,9 @@ export default {
 
 </script>
 <style scoped>
+li {
+  list-style: none;
+}
 .title {
   color: #999;
   padding-bottom: 10px;

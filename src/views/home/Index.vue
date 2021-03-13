@@ -36,13 +36,12 @@
 </template>
 
 <script>
-import ArticalList from "../../components/artical/artical-list";
+import ArticalList from "../../components/artical/artical-list"
 import { createSearch, articalListHelp } from '@/utils/help'
 import { ref, onMounted, watch } from 'vue'
 
 export default {
   name: "HomeIndex",
-
   setup () {
     const { condition, handleSearch } = createSearch()
     const activeName = ref('')
